@@ -1,0 +1,38 @@
+.auth-dialog[open] {
+    position: fixed;
+    top: 20px;
+    width: min(400px, 80dvw);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--color-3);
+
+    & > * {
+        color: var(--color-5);
+    }
+
+    & > :is(input, button) {
+        background: var(--color-1);
+        border-radius: 2px;
+        border: none;
+        padding: 4px 8px;
+    }
+}
+
+.auth-dialog:not([open]) {
+    display: none;
+}
+
+body:has(.auth-dialog[open])::before{
+    background: #000C;
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}

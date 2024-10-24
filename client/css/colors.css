@@ -1,0 +1,17 @@
+:root {
+    --color-1: #FAFAFA;
+    --color-2: #EAEAEA;
+    --color-3: #DEDEDE;
+    --color-4: #CECECE;
+    --color-5: #0A0A0A;
+    --wolfcave-gradient: linear-gradient(90deg, #2C2C2C, #2C2C2C33);
+
+    @media (prefers-color-scheme: dark) {
+        --color-1: #7A7A7A;
+        --color-2: #5A5A5A;
+        --color-3: #3E3E3E;
+        --color-4: #0E0E0E;
+        --color-5: #FAFAFA;
+        --wolfcave-gradient: linear-gradient(90deg, #FAFAFA, #FAFAFA33);
+    }
+}

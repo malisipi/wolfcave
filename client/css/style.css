@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: "Ubuntu", "Noto Color Emoji", sans-serif;
+    color-scheme: light;
+    font-size: 16px;
+
+    @media (prefers-color-scheme: dark) {
+        color-scheme: dark;
+    }
+}
+
+body {
+    background: var(--color-2);
+}
+
+.title {
+    background: var(--wolfcave-gradient);
+    color: var(--color-1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    user-select: none;
+    justify-content: space-between;
+
+    & .nickname {
+        color: var(--color-5);
+    }
+}
+
+.participants {
+    position: fixed;
+    top: 30px;
+    left: 0;
+    width: 50%;
+    height: calc(100% - 30px);
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+
+    & .participant {
+        background: var(--color-3);
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-radius: 5px;
+        color: var(--color-5);
+        text-shadow: 0px 0px 3px var(--color-1), 0px 0px 5px var(--color-1), 0px 0px 7px var(--color-1);
+    }
+}
+
+.messages {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    width: 50%;
+    height: calc(100% - 30px);
+    padding: 4px;
+    background: var(--color-3);
+    display: flex;
+    flex-direction: column;
+    color: var(--color-5);
+
+    & .logs {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        overflow-y: auto;
+        padding: 4px;
+
+        & .server-info {
+            text-align: center;
+            padding: 4px;
+            background: var(--color-4);
+            border-radius: 4px;
+
+            & .nickname {
+                color: var(--color-1);
+                text-decoration: var(--color-1) 2px solid underline;
+            }
+        }
+
+        & .message {
+            padding: 4px;
+            background: var(--color-4);
+            border-radius: 4px;
+            position: relative;
+
+            & .nickname {
+                color: var(--color-1);
+                text-decoration: var(--color-1) 2px solid underline;
+            }
+
+            & button.quote {
+                font-size: 16px;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                background: none;
+                border: none;
+                border-radius: 5px;
+                padding: 4px;
+                color: var(--color-2);
+                
+                &:hover {
+                    background: var(--color-2);
+                    color: var(--color-5);
+                }
+            }
+        }
+
+        & * {
+            word-wrap: anywhere;
+        }
+    }
+
+    & .input {
+        min-height: 40px;
+        display: flex;
+        background: var(--color-4);
+        border-radius: 5px;
+
+        & > * {
+            border: none;
+            background: none
+        }
+
+        & textarea {
+            flex-grow: 1;
+            resize: none;
+            field-sizing: content;
+            color: var(--color-5);
+            max-height: min(300px, calc(100dvh - 100px));
+            padding: 6px;
+            word-wrap: anywhere;
+
+            @media (pointer: coarse) {
+                padding: 11.5px;
+            };
+        }
+        
+        & button {
+            color: var(--color-5);
+            width: 40px;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .participants {
+        top: 30px;
+        left: 0;
+        width: 100%;
+        height: calc(50% - 15px);
+    }
+    
+    .messages {
+        top: calc(15px + 50%);
+        left: 0;
+        width: 100%;
+        height: calc(50% - 15px);
+    }
+}
