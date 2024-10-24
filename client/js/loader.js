@@ -10,7 +10,8 @@ participants_list = document.querySelector(".participants");
 title_nickname = document.querySelector(".title > .nickname");
 messages_logs = document.querySelector(".messages > .logs");
 messages_message_input = document.querySelector(".messages > .input > textarea");
-messages_send_message_button = document.querySelector(".messages > .input > button");
+messages_send_message_upload_image = document.querySelector(".messages > .input > button.upload-image");
+messages_send_message_send = document.querySelector(".messages > .input > button.send");
 
 messages_logs.append_n_scroll = (element) => {
     messages_logs._scrollTopMax = messages_logs.scrollTopMax ?? messages_logs.scrollHeight - messages_logs.getBoundingClientRect().height; /* Chromium Support */
@@ -56,8 +57,17 @@ function log_new_message(message){
     nickname_span.className = "nickname";
     nickname_span.innerText = message.nickname + ":";
     nickname_span.style.setProperty("color", message.color);
-    let user_message_div = document.createElement("span");
-    user_message_div.innerText = " " + message.message;
+
+    let is_image_message = message.message.startsWith("$image::data:image");
+    let user_message_div;
+    if(!is_image_message){
+        user_message_div = document.createElement("span");
+        user_message_div.innerText = " " + message.message;
+    } else {
+        user_message_div = document.createElement("img");
+        user_message_div.src = message.message.replace("$image::", "");
+    };
+
     let quote_button = document.createElement("button");
     quote_button.className = "quote material-symbols-rounded";
     quote_button.innerText = "format_quote";
@@ -86,7 +96,24 @@ function update_handler(message){
     }
 };
 
-messages_send_message_button.addEventListener("click", () => {
+messages_send_message_upload_image.addEventListener("click", () => {
+    let file_uploader = document.createElement("input");
+    file_uploader.addEventListener("input", (event) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', (event) => {
+            event_websocket.send(JSON.stringify({
+                nickname: registered_name,
+                message: "$image::" + event.target.result,
+                event: "message"
+            }));
+        });
+        reader.readAsDataURL(event.target.files[0]);
+    });
+    file_uploader.setAttribute("type", "file");
+    file_uploader.click();
+});
+
+messages_send_message_send.addEventListener("click", () => {
     event_websocket.send(JSON.stringify({
         nickname: registered_name,
         message: messages_message_input.value.trim(),
@@ -99,7 +126,7 @@ var _is_message_sended_by_enter = false;
 
 messages_message_input.addEventListener("keydown", event => {
     if(!event.shiftKey && event.key == "Enter"){
-        messages_send_message_button.click();
+        messages_send_message_send.click();
         _is_message_sended_by_enter = true;
     };
 });

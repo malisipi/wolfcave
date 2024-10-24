@@ -5,6 +5,6 @@
 - [x] Participants list
 - [ ] Voice support
 - [ ] Screen-share support
-- [ ] Image share support
+- [x] Image share support
 - [ ] File share support
 - [ ] Encryption between peers

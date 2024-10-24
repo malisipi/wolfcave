@@ -119,6 +119,10 @@ body {
                     color: var(--color-5);
                 }
             }
+
+            & img {
+                width: 80%;
+            }
         }
 
         & * {
