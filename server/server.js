@@ -26,7 +26,7 @@ if(process.env.WOLFCAVE_AUTH_CODE === undefined){
     console.error("WOLFCAVE_AUTH_CODE env is not set.");
     process.exit(0);
 };
-if(process.env.WOLFCAVE_HOST_CLIENT == "true"){ // TODO: Wolfcave hosting is unsafe, fix it
+if(process.env.WOLFCAVE_HOST_CLIENT == "true"){
     console.warn("Using Wolfcave internal client to host client");
 };
 
