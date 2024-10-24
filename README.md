@@ -1,3 +1,5 @@
+<img src="./logo/wolfcave.png" height="128px" />
+
 # WolfCave
 
 A basic conferencing app with voice and text support
