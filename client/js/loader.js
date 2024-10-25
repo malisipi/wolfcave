@@ -98,6 +98,7 @@ function update_handler(message){
 
 messages_send_message_upload_image.addEventListener("click", () => {
     let file_uploader = document.createElement("input");
+    file_uploader.setAttribute("accept", "image/*");
     file_uploader.addEventListener("input", (event) => {
         const reader = new FileReader();
         reader.addEventListener('load', (event) => {

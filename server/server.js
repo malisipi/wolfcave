@@ -124,6 +124,14 @@ wss.on('connection', (ws, req) => {
                 };
                 ws.close();
             };
+            if(the_message.message != null && the_message.message.startsWith("$image::") && !the_message.message.startsWith("$image::data:image")){
+                the_message = {
+                    "event": "kicked",
+                    "nickname": ws.nickname,
+                    "reason": "User tried to abuse image uploading feature."
+                };
+                ws.close();
+            }
             the_message.ip = ws.ip_address;
             the_message.time = get_time_string();
             the_message.color = ws.color;
